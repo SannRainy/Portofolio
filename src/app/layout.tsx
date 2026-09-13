@@ -77,13 +77,6 @@ export default function RootLayout({
         {/* The Spline runtime lazy-loads its wasm from unpkg; warm the
             connection early so the 3D scene starts faster. */}
         <link rel="preconnect" href="https://unpkg.com" crossOrigin="anonymous" />
-        {process.env.UMAMI_SITE_ID && (
-          <Script
-            defer
-            src={UMAMI_SRC}
-            data-website-id={process.env.UMAMI_SITE_ID}
-          />
-        )}
       </head>
       <body>
         <Providers>
@@ -91,6 +84,13 @@ export default function RootLayout({
         </Providers>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+        {process.env.UMAMI_SITE_ID && (
+          <Script
+            defer
+            src={UMAMI_SRC}
+            data-website-id={process.env.UMAMI_SITE_ID}
+          />
         )}
       </body>
     </html>

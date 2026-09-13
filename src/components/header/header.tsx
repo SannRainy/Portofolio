@@ -50,11 +50,11 @@ const Header = ({ loader }: HeaderProps) => {
       >
       </div> */}
       <div className={cn(styles.bar, "flex items-center justify-between")}>
-        <Link href="/" className="flex items-center justify-center">
-          <Button variant={"link"} className="text-md">
+        <Button variant={"link"} className="text-md font-semibold tracking-wide" asChild>
+          <Link href="/">
             {config.author}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
 
         <FunnyThemeToggle className="w-6 h-6 mr-4 hidden md:flex" />
         {isHome && process.env.NEXT_PUBLIC_WS_URL && <OnlineUsers />}

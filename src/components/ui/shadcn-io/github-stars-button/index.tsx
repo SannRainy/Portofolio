@@ -69,7 +69,10 @@ function GitHubStarsButton({
   useEffect(() => {
     getGithubStars()
       .then((count) => setStars(count))
-      .catch(console.error)
+      .catch(() => {
+        // Repo not found or API error — keep stars at 0 so button stays hidden
+        setStars(0);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -134,7 +137,7 @@ function GitHubStarsButton({
     [handleDisplayParticles, repoUrl],
   );
 
-  if (isLoading) return null;
+  if (isLoading || stars === 0) return null;
 
   return (
     <motion.a

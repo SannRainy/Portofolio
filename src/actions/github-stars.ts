@@ -9,17 +9,25 @@ export async function getGithubStars(): Promise<number> {
   "use cache";
   cacheLife({ stale: 300, revalidate: 300 });
 
-  const res = await fetch(
-    `https://api.github.com/repos/${config.githubUsername}/${config.githubRepo}`,
-    { headers: { Accept: "application/vnd.github+json" } },
-  );
-  if (!res.ok) {
-    throw new Error(`GitHub API responded with ${res.status}`);
+  if (!config.githubUsername || !config.githubRepo) {
+    return 0;
   }
 
-  const data = await res.json();
-  if (typeof data.stargazers_count !== "number") {
-    throw new Error("Unexpected GitHub API response shape");
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${config.githubUsername}/${config.githubRepo}`,
+      { headers: { Accept: "application/vnd.github+json" } },
+    );
+    if (!res.ok) {
+      return 0;
+    }
+
+    const data = await res.json();
+    if (typeof data.stargazers_count !== "number") {
+      return 0;
+    }
+    return data.stargazers_count;
+  } catch {
+    return 0;
   }
-  return data.stargazers_count;
 }
