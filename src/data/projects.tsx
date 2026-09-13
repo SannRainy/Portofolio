@@ -13,6 +13,8 @@ import {
   SiDart,
   SiTensorflow,
   SiFastapi,
+  SiNeo4J,
+  SiWhatsapp,
 } from "react-icons/si";
 const BASE_PATH = "/assets/projects-screenshots";
 
@@ -204,6 +206,18 @@ const PROJECT_SKILLS = {
     fg: "white",
     icon: <SiFastapi />,
   },
+  neo4j: {
+    title: "Neo4j",
+    bg: "black",
+    fg: "white",
+    icon: <SiNeo4J />,
+  },
+  whatsapp: {
+    title: "WhatsApp API",
+    bg: "black",
+    fg: "white",
+    icon: <SiWhatsapp />,
+  },
   expo: {
     title: "Expo",
     bg: "black",
@@ -233,8 +247,25 @@ const projects: Project[] = [
     id: "brielle",
     category: "Web Application & Real-time System",
     title: "Brielle - Bug Tracking & Project Management",
-    src: `${BASE_PATH}/codingducks/landing.png`,
-    screenshots: ["landing.png"],
+    src: `${BASE_PATH}/Management Bug/DashboardMain.png`,
+    screenshots: [
+      "AdminDashboard.jpg",
+      "DevBoard.jpg",
+      "AdminBug.jpg",
+      "ClientBugReport.jpg",
+      "AdminCS.jpg",
+      "ClientDashboard.jpg",
+      "DevDashboard.jpg",
+      "DevBug.jpg",
+      "AdminProject.jpg",
+      "AdminUsers.jpg",
+      "ClientProject.jpg",
+      "ClientCS.jpg",
+      "DevCS.jpg",
+      "AdminProfile.jpg",
+      "DevProfile.jpg",
+      "ClientProfile.jpg",
+    ].map((s) => `${BASE_PATH}/Management Bug/${s}`),
     skills: {
       frontend: [
         PROJECT_SKILLS.react,
@@ -244,6 +275,7 @@ const projects: Project[] = [
       backend: [
         PROJECT_SKILLS.node,
         PROJECT_SKILLS.express,
+        PROJECT_SKILLS.whatsapp,
         PROJECT_SKILLS.docker,
       ],
     },
@@ -251,22 +283,111 @@ const projects: Project[] = [
     github: "https://github.com/rosselvert/Brielle",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            Platform Bug Tracking &amp; Manajemen Proyek Klien Real-time.
+        <div className="space-y-6">
+          <TypographyP className="font-mono text-xl md:text-2xl text-center font-semibold">
+            Platform Bug Tracking &amp; Manajemen Proyek Multi-Role Real-Time
           </TypographyP>
-          <TypographyP className="font-mono">
-            Platform terpadu untuk monitoring dan pelaporan bug proyek klien yang dikembangkan saat magang di CV AMINS PROJECT TEKNOLOGI INDONESIA. Dilengkapi integrasi notifikasi otomatis via WhatsApp API untuk mempercepat respon penanganan isu teknis antara admin, developer, dan klien.
-          </TypographyP>
+
+          <p className="text-sm font-mono text-center text-muted-foreground max-w-2xl mx-auto">
+            Dikembangkan selama magang di <strong>CV AMINS PROJECT TEKNOLOGI INDONESIA</strong> sebagai sistem terpadu untuk monitoring isu teknis, tracking progress sprint, dan koordinasi transparan antara Admin, Developer, dan Klien.
+          </p>
+
           <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">Fitur Utama</TypographyH3>
-          <p className="font-mono mb-2">
-            • Pelaporan isu &amp; tracking lifecycle status bug secara real-time.<br />
-            • Integrasi WhatsApp API untuk otomatisasi pengiriman instant notification.<br />
-            • Dashboard manajemen task dan progress sprint bagi developer dan klien.<br />
-            • Arsitektur backend modular dan scalable dengan Node.js &amp; Express.
-          </p>
+          {/* Interactive SlideShow */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-muted-foreground px-1">
+              <span>📸 Galeri Tangkapan Layar Sistem ({this.screenshots.length} Tampilan)</span>
+              <span>Navigasi menggunakan tombol panah atau swipe</span>
+            </div>
+            <SlideShow images={this.screenshots} />
+          </div>
+
+          {/* Ringkasan Arsitektur & Peran */}
+          <div className="space-y-3 pt-2">
+            <TypographyH3 className="border-b border-border/40 pb-2">
+              Arsitektur Multi-Role (RBAC)
+            </TypographyH3>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Brielle dirancang dengan sistem perizinan berbasis peran (Role-Based Access Control) yang memisahkan alur kerja, hak akses data, dan antarmuka sesuai tanggung jawab pengguna:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <h4 className="font-semibold text-sm">Admin Workspace</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Monitoring metrik kesehatan proyek secara komprehensif, alokasi tugas ke developer, manajemen direktori pengguna/klien, serta eskalasi tiket bug prioritas tinggi.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  AdminDashboard • AdminBug • AdminProject
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                  <h4 className="font-semibold text-sm">Developer Workspace</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Papan kerja Kanban interaktif untuk sprint tracking, inspeksi detail reproduksi bug, pembaruan status pengerjaan (In Progress, Testing, Resolved), dan saluran CS internal.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  DevBoard • DevBug • DevCS
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <h4 className="font-semibold text-sm">Client Portal</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Form pelaporan bug intuitif lengkap dengan bukti screenshot &amp; level keparahan, transparansi progress perbaikan real-time, dan konsultasi tiket via modul CS.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  ClientBugReport • ClientDashboard • ClientProject
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Deep-dive Teknis */}
+          <div className="space-y-3 pt-2">
+            <TypographyH3 className="border-b border-border/40 pb-2">
+              Sorotan Teknologi &amp; Implementasi Teknis
+            </TypographyH3>
+            <div className="space-y-3 text-sm leading-relaxed">
+              <div className="rounded-lg border border-border/40 bg-muted/20 p-3.5 space-y-1">
+                <div className="font-semibold text-foreground flex items-center gap-2">
+                  <span>⚡ Otomatisasi Notifikasi WhatsApp API</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Mengintegrasikan WhatsApp Business API / Webhook untuk otomatisasi pengiriman push notification instan ke nomor WhatsApp klien maupun engineer ketika terdapat laporan bug baru, eskalasi tiket kritis, atau pembaruan status penyelesaian. Langkah ini secara drastis memangkas response time penanganan masalah teknis.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-border/40 bg-muted/20 p-3.5 space-y-1">
+                <div className="font-semibold text-foreground flex items-center gap-2">
+                  <span>🔄 Siklus Hidup Bug Terstruktur (Bug Lifecycle Pipeline)</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Alur pelacakan bug menyeluruh dari status <em>Reported ➔ Verified ➔ Assigned ➔ In Progress ➔ QA / Testing ➔ Closed</em> dengan riwayat audit trail lengkap, lampiran log, dan threads percakapan terpusat.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-border/40 bg-muted/20 p-3.5 space-y-1">
+                <div className="font-semibold text-foreground flex items-center gap-2">
+                  <span>🐳 Arsitektur Backend Modular &amp; Containerization Docker</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Backend dirancang modular menggunakan Node.js dan Express dengan pemisahan concern berlapis (controller, services, data validation middleware), dikemas dalam container Docker demi konsistensi environment runtime dan kemudahan skalabilitas.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       );
     },
@@ -275,17 +396,35 @@ const projects: Project[] = [
     id: "alisa",
     category: "AI & GraphRAG (Prosiding SENATIK 2026)",
     title: "A.L.I.S.A - Adaptive Learning & Intelligent System Assistant",
-    src: `${BASE_PATH}/storekit/landing.png`,
-    screenshots: ["landing.png"],
+    src: `${BASE_PATH}/A.L.I.S.A/ChatbotPage.png`,
+    screenshots: [
+      "ChatbotPage.png",
+      "Neo4JManagement.png",
+      "AICorrectionPage.png",
+      "KanjiDojoPage.png",
+      "KanjiFlashcard.png",
+      "KanjiExam.png",
+      "SRSReviewPage.png",
+      "SpeakingModePage.png",
+      "QuizModePage.png",
+      "QuizPage.png",
+      "AdminDashboard.png",
+      "AchievementPage.png",
+      "ProfileModePage.png",
+      "LoginPage.png",
+      "RegisterPage.png",
+    ].map((s) => `${BASE_PATH}/A.L.I.S.A/${s}`),
     skills: {
       frontend: [
         PROJECT_SKILLS.next,
         PROJECT_SKILLS.react,
+        PROJECT_SKILLS.ts,
         PROJECT_SKILLS.tailwind,
       ],
       backend: [
         PROJECT_SKILLS.python,
         PROJECT_SKILLS.fastapi,
+        PROJECT_SKILLS.neo4j,
         PROJECT_SKILLS.docker,
       ],
     },
@@ -293,21 +432,123 @@ const projects: Project[] = [
     github: "https://github.com/SannRainy/A.L.I.S.A.",
     get content() {
       return (
-        <div>
-          <TypographyP className="font-mono text-2xl text-center">
-            Sistem Tutor Virtual Pembelajaran Bahasa Adaptif.
+        <div className="space-y-6">
+          <TypographyP className="font-mono text-xl md:text-2xl text-center font-semibold">
+            Sistem Tutor Virtual Cerdas Berbasis Neuro-Symbolic AI &amp; GraphRAG
           </TypographyP>
-          <TypographyP className="font-mono">
-            Riset dan implementasi sistem kecerdasan buatan gabungan (Neuro-Symbolic AI) dan arsitektur Graph Retrieval-Augmented Generation (GraphRAG) untuk personalisasi jalur pembelajaran bahasa interaktif (dipublikasikan pada Prosiding SENATIK 2026).
-          </TypographyP>
+
+          <p className="text-sm font-mono text-center text-muted-foreground max-w-2xl mx-auto">
+            Riset inovasi tutor pembelajaran bahasa adaptif yang memadukan <strong>Graph Retrieval-Augmented Generation (GraphRAG)</strong> dan <strong>Neuro-Symbolic Reasoning</strong>. Dipublikasikan pada <strong>Prosiding Seminar Nasional Rekayasa Teknologi Informasi (SENATIK) 2026</strong>.
+          </p>
+
           <ProjectsLinks live={this.live} repo={this.github} />
 
-          <TypographyH3 className="my-4 mt-8">Fitur &amp; Inovasi Utama</TypographyH3>
-          <p className="font-mono mb-2">
-            • Graph Retrieval-Augmented Generation (GraphRAG) untuk pemodelan struktur materi pengetahuan.<br />
-            • Neuro-Symbolic AI untuk penalaran logika pembelajaran adaptif yang presisi.<br />
-            • Tutor virtual interaktif dengan analisis pemahaman dan feedback kontekstual pengguna.
-          </p>
+          {/* Interactive SlideShow */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-muted-foreground px-1">
+              <span>📸 Galeri Tangkapan Layar Sistem ({this.screenshots.length} Tampilan)</span>
+              <span>Navigasi menggunakan tombol panah atau swipe</span>
+            </div>
+            <SlideShow images={this.screenshots} />
+          </div>
+
+          {/* Latar Belakang & Inovasi Riset */}
+          <div className="space-y-3 pt-2">
+            <TypographyH3 className="border-b border-border/40 pb-2">
+              Latar Belakang Riset &amp; Paradigma Baru
+            </TypographyH3>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Aplikasi tutor bahasa konvensional berbasis LLM seringkali mengalami halusinasi aturan gramatikal dan gagal memahami keterkaitan prasyarat (prerequisite relationships) antartopik materi. A.L.I.S.A memecahkan tantangan ini dengan menyinergikan representasi graf pengetahuan (Knowledge Graph) dan penalaran simbolik berbasis kaidah bahasa formal.
+            </p>
+          </div>
+
+          {/* Deep-dive Teknis */}
+          <div className="space-y-3 pt-2">
+            <TypographyH3 className="border-b border-border/40 pb-2">
+              Arsitektur AI &amp; Deep Technical Exploration
+            </TypographyH3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-violet-500" />
+                  <h4 className="font-semibold text-sm">GraphRAG via Neo4j Knowledge Graph</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Memodelkan struktur materi tata bahasa, hierarki kanji, radikal, dan keterkaitan semantik ke dalam graf multi-relasional Neo4j. Memungkinkan retrieval materi kontekstual yang memahami hierarki prasyarat sebelum konsep baru diajarkan.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  Neo4JManagement • Graph Traversal &amp; Cypher
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
+                  <h4 className="font-semibold text-sm">Neuro-Symbolic Reasoning</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Menggabungkan fleksibilitas conversational Large Language Model dengan aturan tata bahasa simbolik deterministik. Menjamin koreksi sintaksis akurat dan bebas dari halusinasi aturan gramatikal.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  AICorrectionPage • Formal Grammar Verification
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <h4 className="font-semibold text-sm">Spaced Repetition System (SRS)</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Algoritma kurva lupa adaptif (berbasis prinsip interval FSRS/SM-2) untuk menghitung interval repetisi optimal kosakata dan kanji, disesuaikan dengan retensi memori spesifik masing-masing pembelajar.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  SRSReviewPage • KanjiFlashcard • KanjiDojo
+                </span>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-card/50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <h4 className="font-semibold text-sm">High-Throughput Fullstack Pipeline</h4>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Backend asinkron berkecepatan tinggi dengan Python &amp; FastAPI untuk streaming percakapan LLM dan speech processing, berpadu dengan antarmuka Next.js &amp; Tailwind CSS yang interaktif.
+                </p>
+                <span className="inline-block text-[11px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                  FastAPI • Next.js • Docker Container
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Ekosistem Modul Pembelajaran */}
+          <div className="space-y-3 pt-2">
+            <TypographyH3 className="border-b border-border/40 pb-2">
+              Modul Pembelajaran &amp; Fitur Unggulan
+            </TypographyH3>
+            <div className="space-y-2.5 text-xs text-muted-foreground font-mono">
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">💬 Chatbot AI Tutor (ChatbotPage):</strong> Percakapan real-time multi-turn dengan adaptive scaffolding, penjelasan kontekstual, dan personalisasi respon.
+              </div>
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">🌐 Visualisasi Graf Neo4j (Neo4JManagement):</strong> Manajemen visual simpul materi, relasi prasyarat, dan ontologi pengetahuan bahasa.
+              </div>
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">📝 Koreksi Kalimat AI (AICorrectionPage):</strong> Analisis struktur kalimat, penandaan kesalahan partikel/sintaksis, dan saran rekonstruksi kalimat alami.
+              </div>
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">🥋 Kanji Dojo, Flashcard &amp; Ujian (KanjiDojoPage, KanjiExam, KanjiFlashcard):</strong> Pembelajaran kanji interaktif dengan urutan goresan (stroke order), kunyomi, onyomi, dan evaluasi berkala.
+              </div>
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">🎙️ Speaking &amp; Pronunciation Mode (SpeakingModePage):</strong> Latihan pelafalan interaktif dengan evaluasi kemiripan fonetik.
+              </div>
+              <div className="p-2.5 rounded-lg border border-border/40 bg-muted/20">
+                <strong className="text-foreground">🏆 Gamifikasi &amp; Analitik Progres (AchievementPage, QuizModePage, AdminDashboard):</strong> Kuis dinamis, pelacakan milestone, streak harian, dan dashboard evaluasi.
+              </div>
+            </div>
+          </div>
         </div>
       );
     },
@@ -316,8 +557,8 @@ const projects: Project[] = [
     id: "virtual-assistant-nlu-nlg",
     category: "Conversational AI & Natural Language Processing",
     title: "Virtual Assistant NLU & NLG",
-    src: `${BASE_PATH}/kanbi/landing.png`,
-    screenshots: ["landing.png"],
+    src: "",
+    screenshots: [],
     skills: {
       frontend: [
         PROJECT_SKILLS.react,
@@ -356,8 +597,8 @@ const projects: Project[] = [
     id: "ai-bahasa-isyarat-mobile",
     category: "Mobile Application & Computer Vision",
     title: "Sign Language AI Mobile",
-    src: `${BASE_PATH}/waku/landing.png`,
-    screenshots: ["landing.png"],
+    src: "",
+    screenshots: [],
     skills: {
       frontend: [
         PROJECT_SKILLS.flutter,
